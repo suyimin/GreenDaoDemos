@@ -1,16 +1,12 @@
-package com.example.extdannyjiang.greendaodemo.dao_bean;
+package com.xdroid.greendao.bean;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Property;
 import org.greenrobot.greendao.annotation.Generated;
 
-/**
- * Created by ext.danny.jiang on 17/6/20.
- */
-
 @Entity
-public class MyOrder {
+public class Order {
 
     @Id(autoincrement = true)
     private Long id;
@@ -21,15 +17,15 @@ public class MyOrder {
     @Property(nameInDb = "customId")
     private Long customId;
 
-    @Generated(hash = 1011091970)
-    public MyOrder(Long id, String date, Long customId) {
+    @Generated(hash = 915161134)
+    public Order(Long id, String date, Long customId) {
         this.id = id;
         this.date = date;
         this.customId = customId;
     }
 
-    @Generated(hash = 191667629)
-    public MyOrder() {
+    @Generated(hash = 1105174599)
+    public Order() {
     }
 
     public Long getId() {

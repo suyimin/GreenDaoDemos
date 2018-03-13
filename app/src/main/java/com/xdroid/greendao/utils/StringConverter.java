@@ -1,13 +1,9 @@
-package com.example.extdannyjiang.greendaodemo.utils;
+package com.xdroid.greendao.utils;
 
 import org.greenrobot.greendao.converter.PropertyConverter;
 
 import java.util.Arrays;
 import java.util.List;
-
-/**
- * Created by ext.danny.jiang on 17/6/20.
- */
 
 public class StringConverter implements PropertyConverter<List<String>, String>{
 

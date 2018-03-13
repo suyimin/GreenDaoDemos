@@ -8,16 +8,15 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'org.greenrobot:greendao-gradle-plugin:3.0.0'
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2'
     }
 }
 ```
 
 然后在app的build.gradle中添加依赖
 ```
-    compile 'org.greenrobot:greendao:3.0.1'
-    compile 'org.greenrobot:greendao-generator:3.0.0'
-    compile 'net.zetetic:android-database-sqlcipher:3.5.2'
+    compile 'org.greenrobot:greendao:3.2.2'
+    compile 'org.greenrobot:greendao-generator:3.2.2'
 ```
 
 #### 2 配置GreenDao

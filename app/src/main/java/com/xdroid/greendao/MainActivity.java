@@ -1,7 +1,7 @@
-package com.example.extdannyjiang.greendaodemo;
+package com.xdroid.greendao;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -9,12 +9,12 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.extdannyjiang.greendaodemo.dao.DaoMaster;
-import com.example.extdannyjiang.greendaodemo.dao.DaoSession;
-import com.example.extdannyjiang.greendaodemo.dao.MyOrderDao;
-import com.example.extdannyjiang.greendaodemo.dao.UserDao;
-import com.example.extdannyjiang.greendaodemo.dao_bean.MyOrder;
-import com.example.extdannyjiang.greendaodemo.dao_bean.User;
+import com.xdroid.greendao.bean.Order;
+import com.xdroid.greendao.bean.User;
+import com.xdroid.greendao.dao.DaoMaster;
+import com.xdroid.greendao.dao.DaoSession;
+import com.xdroid.greendao.dao.OrderDao;
+import com.xdroid.greendao.dao.UserDao;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private List<String> list = new ArrayList<>();
     private EditText editNickName1;
     private EditText editNickName2;
-    private MyOrderDao orderDao;
+    private OrderDao orderDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         userDao = daoSession.getUserDao();
 
-        orderDao = daoSession.getMyOrderDao();
+        orderDao = daoSession.getOrderDao();
     }
 
     public void insert(View view) {
@@ -86,14 +86,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void insertOrders(long userId) {
-        MyOrder myOrder1 = new MyOrder(null, new Date() + "", userId);
-        MyOrder myOrder2 = new MyOrder(null, new Date() + "", userId);
+        Order order1 = new Order(null, new Date() + "", userId);
+        Order order2 = new Order(null, new Date() + "", userId);
 
-        long orderId1 = orderDao.insert(myOrder1);
-        long orderId2 = orderDao.insert(myOrder2);
+        long orderId1 = orderDao.insert(order1);
+        long orderId2 = orderDao.insert(order2);
 
         if (orderId1 >= 0 && orderId2 >= 0) {
-            Toast.makeText(this, "插入 MyOrder 成功", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "插入 Order 成功", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -117,9 +117,9 @@ public class MainActivity extends AppCompatActivity {
     public void queryAllOrders(View view) {
         List<User> users = userDao.loadAll();
         for (User user : users) {
-            List<MyOrder> orders = user.getOrders();
+            List<Order> orders = user.getOrders();
 
-            for (MyOrder order : orders) {
+            for (Order order : orders) {
                 Log.e("TAG", "get user " + user.getName() + " order " + order.getDate());
             }
         }

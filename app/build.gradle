@@ -4,7 +4,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
-        applicationId "com.example.extdannyjiang.greendaodemo"
+        applicationId "com.xdroid.greendao"
         minSdkVersion 15
         targetSdkVersion 25
         versionCode 1
@@ -31,5 +31,5 @@ dependencies {
 
 greendao {
     targetGenDir 'src/main/java'
-    daoPackage 'com.example.extdannyjiang.greendaodemo.dao'
+    daoPackage 'com.xdroid.greendao.dao'
 }
