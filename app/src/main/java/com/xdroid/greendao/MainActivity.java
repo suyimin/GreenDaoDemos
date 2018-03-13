@@ -1,8 +1,7 @@
 package com.xdroid.greendao;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -20,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     private DaoMaster daoMaster;
     private DaoSession daoSession;
@@ -76,13 +75,8 @@ public class MainActivity extends AppCompatActivity {
         long insertID = userDao.insert(user);
 
         if (insertID >= 0) {
-            Toast.makeText(this, "插入 User 成功", Toast.LENGTH_SHORT).show();
-
             insertOrders(insertID);
-        } else {
-            Toast.makeText(this, "插入User 失败", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     private void insertOrders(long userId) {
@@ -99,29 +93,34 @@ public class MainActivity extends AppCompatActivity {
 
     public void query(View view) {
         List<User> users = userDao.queryBuilder().list();
-
         list.clear();
-
         for (User user : users) {
             String name = user.getName();
             List<String> nickNames = user.getNickNames();
-            for (String nickName : nickNames) {
-                Log.e("TAG", "query " + name + " : " + nickName);
+            if (nickNames == null || nickNames.size() == 0) {
+                list.add("name->" + name);
+            } else if (nickNames.size() == 1) {
+                list.add("name->" + name + ", nickName1->" + nickNames.get(0));
+            } else if (nickNames.size() == 2) {
+                list.add("name->" + name + ", nickName1->" + nickNames.get(0) + ", nickName2->" + nickNames.get(1));
             }
-            list.add(user.getName());
         }
-
         adapter.notifyDataSetChanged();
     }
 
     public void queryAllOrders(View view) {
         List<User> users = userDao.loadAll();
+
+        list.clear();
+
         for (User user : users) {
             List<Order> orders = user.getOrders();
+            String name = user.getName();
 
             for (Order order : orders) {
-                Log.e("TAG", "get user " + user.getName() + " order " + order.getDate());
+                list.add("name->" + name + ", order date->" + order.getDate());
             }
         }
+        adapter.notifyDataSetChanged();
     }
 }
